@@ -2,6 +2,7 @@ package com.example.n_1check.web;
 
 import com.example.n_1check.domain.entity.Member;
 import com.example.n_1check.domain.repository.MemberRepository;
+import com.example.n_1check.web.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,9 +19,10 @@ public class MemberController {
 
     @GetMapping("/findAll")
     @ResponseBody
-    public List<Member> memberList(){
+    public List<MemberDto> memberList(){
         System.out.println("findAll");
-        return memberRepository.findAll();
+                return memberRepository.findAll().stream().map(m -> new MemberDto(m.getId(),m.getName()))
+                .collect(Collectors.toList());
     }
 }
 //Hibernate:
