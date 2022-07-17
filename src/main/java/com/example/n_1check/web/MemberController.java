@@ -19,10 +19,9 @@ public class MemberController {
 
     @GetMapping("/findAll")
     @ResponseBody
-    public List<MemberDto> memberList(){
+    public List<Member> memberList(){
         System.out.println("findAll");
-                return memberRepository.findAll().stream().map(m -> new MemberDto(m.getId(),m.getName()))
-                .collect(Collectors.toList());
+        return memberRepository.findAll();
     }
 }
 //Hibernate:
